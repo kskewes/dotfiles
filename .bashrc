@@ -40,7 +40,7 @@ if hash helm 2>/dev/null; then
 fi
 
 # kube-ps1
-kubeps1=${GOPATH}/src/github.com/kube-ps1/kube-ps1.sh
+kubeps1=${GOPATH}/src/github.com/jonmosco/kube-ps1/kube-ps1.sh
 if [[ -r "$kubeps1" ]] && [[ -f "$kubeps1" ]]; then
 	# shellcheck source=/dev/null
 	source "$kubeps1"

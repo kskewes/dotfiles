@@ -114,11 +114,12 @@ else
 	hostStyle="${cyan}";
 fi;
 
-#kubeps1=''
-#if [[ -f ${GOPATH}/src/github.com/kube-ps1/kube-ps1.sh ]]; then
-#	kubeps1=$(${GOPATH}/src/github.com/kube-ps1/kube-ps1.sh)
-#fi
-
+# kube-ps1
+kubeps1=${GOPATH}/src/github.com/jonmosco/kube-ps1/kube-ps1.sh
+if [[ -r "$kubeps1" ]] && [[ -f "$kubeps1" ]]; then
+        # shellcheck source=/dev/null
+        source "$kubeps1"
+fi
 
 # Set the terminal title to the current working directory.
 PS1="\\[\\033]0;\\w\\007\\]";
