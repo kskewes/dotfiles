@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Set VIM as default editor, `less` -> `v`
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+# run kubeconfigs() function and export KUBECONFIG
+kubeconfigs

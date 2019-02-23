@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# `kubeconfigs` looks for KUBECONFIG .yml files and exports KUBECONFIG
+kubeconfigs() {
+
+	kubeconfig_dirs=("${HOME}/.kube" "${HOME}/.bluemix/plugins/container-service/clusters")
+	kubeconfigs=""
+
+	# Loop through directories looking for kubeconfigs
+	for dir in "${kubeconfig_dirs[@]}"; do
+		kubeconfigs+=$(find "$dir" -type f -name '*.yml' -print0 -exec \
+			grep -qlr 'kind: Config' {} \; | \
+			xargs --null | \
+			sed -e 's/ /:/g')
+		kubeconfigs+=":"
+	done
+
+	# Add default kube config location if it exists
+	if hash "${HOME}/.kube/config" 2>/dev/null; then
+        # shellcheck source=/dev/null
+		kubeconfigs+="${HOME}/.kube/config:"
+	fi
+
+	# Trim trailing colon
+	kubeconfigs=${kubeconfigs::-1}
+
+	export KUBECONFIG="$kubeconfigs"
+}
+
+# `sedkey $line_number` removes line from ssh hosts
+sedkey() {
+	sed -i "${1}d" ~/.ssh/known_hosts
+}
+
+# Pandoc Commonmark render Markdown then pipe to Lynx
+pd() {
+  pandoc -f commonmark "$1" | lynx -stdin
+}
+
+# `v` with no arguments opens the current directory in Vim, otherwise opens the
+# given location
+v() {
+	if [ $# -eq 0 ]; then
+		nvim .
+	else
+		nvim "$@"
+	fi
+}
+
+# `o` with no arguments opens the current directory, otherwise opens the given
+# location
+o() {
+	if [ $# -eq 0 ]; then
+		xdg-open .	> /dev/null 2>&1
+	else
+		xdg-open "$@" > /dev/null 2>&1
+	fi
+}
