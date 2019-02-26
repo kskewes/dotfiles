@@ -2,7 +2,7 @@
 
 # Load .bashrc and other files...
 # for file in ~/.{bashrc,bash_prompt,aliases,functions,path,dockerfunc,extra,exports}; do
-for file in ~/.{bashrc,bash_prompt,aliases,path,extra,exports}; do
+for file in ~/.{bashrc,bash_prompt,aliases,functions,path,extra,exports}; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
 		# shellcheck source=/dev/null
 		source "$file"
