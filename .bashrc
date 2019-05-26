@@ -33,6 +33,12 @@ if [[ -d /usr/local/ibmcloud ]]; then
 	source /usr/local/ibmcloud/autocomplete/bash_autocomplete
 fi
 
+# gcloud bash completion
+if [[ -f /usr/lib/google-cloud-sdk/completion.bash.inc ]]; then
+	# shellcheck source=/dev/null
+	source /usr/lib/google-cloud-sdk/completion.bash.inc
+fi
+
 # Helm bash completion
 if hash helm 2>/dev/null; then
 	# shellcheck source=/dev/null
