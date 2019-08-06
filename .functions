@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# `cdf` changes to the directory of the last commands argument
+cdf() {
+	cd "$(dirname "$1")" || echo 'failed'
+}
+
+# `flushdns` clears DNS cache kept by systemd-resolve
+flushdns() {
+	sudo systemd-resolve --flush-caches
+}
+
 # `kubeconfigs` looks for KUBECONFIG .yml files and exports KUBECONFIG
 kubeconfigs() {
 
@@ -34,7 +44,13 @@ sedkey() {
 
 # Pandoc Commonmark render Markdown then pipe to Lynx
 pd() {
-  pandoc -f commonmark "$1" | lynx -stdin
+	pandoc -f commonmark "$1" | lynx -stdin
+}
+
+# socat proxy from *:PORT to localhost:PORT - useful for kubectl/etc
+sc() {
+	echo "usage: sc <*:port> <localhost:port>"
+	socat "tcp4-listen:${1},reuseaddr,fork" "tcp:localhost:${2}"
 }
 
 # `v` with no arguments opens the current directory in Vim, otherwise opens the

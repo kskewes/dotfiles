@@ -27,6 +27,12 @@ if hash kubectl 2>/dev/null; then
 	source <(kubectl completion bash)
 fi
 
+# stern - advanced kubernetes log output
+if hash stern 2>/dev/null; then
+	# shellcheck source=/dev/null
+	source <(stern --completion=bash)
+fi
+
 # IBM Cloud CLI
 if [[ -d /usr/local/ibmcloud ]]; then
 	# shellcheck source=/dev/null
