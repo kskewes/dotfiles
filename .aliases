@@ -6,7 +6,13 @@ alias gitlab='cd ${GOPATH}/src/gitlab.com'
 alias github='cd ${GOPATH}/src/github.com'
 
 # Git Aliases
-alias g="git"
+alias g='git'
+alias gb='git branch'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gch='git checkout'
+alias gchb='git checkout -b'
+alias gp='git pull'
 alias gpr='git pull --rebase'
 alias gs='git stash'
 alias gsp='git stash pop'
@@ -20,8 +26,6 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias ~="cd ~" # `cd` is probably faster to type though
-alias -- -="cd -"
 
 # Always enable colored `grep` output
 alias grep='grep --color=auto '
@@ -55,3 +59,9 @@ fi
 
 alias b64='base64 '
 alias b64d='base64 -d'
+
+# IP addresses
+alias pubip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' | grep -v '127.0.0.1'"
+alias ips="sudo ifconfig -a | grep -o 'inet6\\? \\(addr:\\)\\?\\s\\?\\(\\(\\([0-9]\\+\\.\\)\\{3\\}[0-9]\\+\\)\\|[a-fA-F0-9:]\\+\\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
