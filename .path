@@ -6,5 +6,8 @@ export GOPATH="${HOME}/go"
 # add go path
 export PATH="${PATH}:/usr/local/go/bin:${GOPATH}/bin"
 
+# add awscli path
+export PATH="${PATH}:${HOME}/.local/bin"
+
 # update cdpath with go/src
 export CDPATH=${CDPATH}:${GOPATH}/src

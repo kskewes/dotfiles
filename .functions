@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# `flushgit` removes any merged branches
+flushgit() {
+	git branch --merged | \
+		grep -v 'stashes\|master' >/tmp/merged-branches && \
+		vi /tmp/merged-branches && \
+		xargs git branch -d </tmp/merged-branches
+}
+
 # `cdf` changes to the directory of the last commands argument
 cdf() {
 	cd "$(dirname "$1")" || echo 'failed'

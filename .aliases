@@ -6,7 +6,7 @@ alias gitlab='cd ${GOPATH}/src/gitlab.com'
 alias github='cd ${GOPATH}/src/github.com'
 
 # Git Aliases
-alias g='git'
+alias g='git commit'
 alias gb='git branch'
 alias gd='git diff'
 alias gdc='git diff --cached'
