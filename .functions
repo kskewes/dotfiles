@@ -1,5 +1,40 @@
 #!/bin/bash
 
+awsprof() {
+    case "$1" in
+        "")
+            export AWS_PROFILE=""
+            ;;
+        *)
+            export AWS_PROFILE="${1}"
+            ;;
+    esac
+
+    echo "AWS Profile: ${AWS_PROFILE}"
+}
+
+_awsprof_completions() {
+    COMPREPLY=($(compgen -W "$( \
+        grep '\[' ~/.aws/credentials \
+        | tr -d '[]'
+    )" "${COMP_WORDS[1]}"))
+}
+
+complete -F _awsprof_completions awsprof
+
+
+# Base64 conversion helpers
+b64() {
+	echo -n "$1" | base64
+}
+b64d() {
+	echo -n "$1" | base64 -d
+}
+
+sshns() {
+	ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null "$@"
+}
+
 # `flushgit` removes any merged branches
 flushgit() {
 	git branch --merged | \

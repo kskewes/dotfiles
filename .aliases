@@ -35,7 +35,7 @@ alias grep='grep --color=auto '
 
 # List all files colorized in long format
 # shellcheck disable=SC2139
-alias l="ls -lF ${colorflag}"
+alias l="ls -lhF ${colorflag}"
 
 # List all files colorized in long format, including dot files
 # shellcheck disable=SC2139
@@ -57,11 +57,9 @@ else # OS X `ls`
 	colorflag="-G"
 fi
 
-alias b64='base64 '
-alias b64d='base64 -d'
-
 # IP addresses
 alias pubip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="sudo ifconfig | grep -Eo 'inet (addr:)?([0-9]*\\.){3}[0-9]*' | grep -Eo '([0-9]*\\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias ips="sudo ifconfig -a | grep -o 'inet6\\? \\(addr:\\)\\?\\s\\?\\(\\(\\([0-9]\\+\\.\\)\\{3\\}[0-9]\\+\\)\\|[a-fA-F0-9:]\\+\\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
+alias sshbastion='ssh $(aws ec2 describe-instances --filters "Name=tag-value,Values=bastion" --query "Reservations[0].Instances[0].PublicDnsName" --output text)'

@@ -27,6 +27,12 @@ if hash kubectl 2>/dev/null; then
 	source <(kubectl completion bash)
 fi
 
+# source kind bash completion
+if hash kind 2>/dev/null; then
+	# shellcheck source=/dev/null
+	source <(kind completion bash)
+fi
+
 # stern - advanced kubernetes log output
 if hash stern 2>/dev/null; then
 	# shellcheck source=/dev/null
